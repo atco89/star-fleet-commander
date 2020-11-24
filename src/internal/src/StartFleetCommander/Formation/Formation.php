@@ -15,12 +15,12 @@ abstract class Formation
     /**
      * @var Spaceship[]
      */
-    protected array $militarySpaceships;
+    protected array $militarySpaceships = [];
 
     /**
      * @var Spaceship[]
      */
-    protected array $civilianSpaceships;
+    protected array $civilianSpaceships = [];
 
     /**
      * @param Spaceship[] $fleet

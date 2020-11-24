@@ -1,4 +1,0 @@
-acme.my_bundle.api.default:
-  class: App\Acme\MyBundle\Api\StarFleetCommanderApi
-  tags:
-    - { name: "open_api_server.api", api: "default" }

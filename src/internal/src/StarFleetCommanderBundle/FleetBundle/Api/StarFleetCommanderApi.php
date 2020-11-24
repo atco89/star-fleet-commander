@@ -10,7 +10,7 @@ use OpenAPI\Server\Api\DefaultApiInterface;
 use OpenAPI\Server\Model\SpaceshipResponse;
 
 /**
- * Class StarFleetCommanderApi
+ * Class DefaultApi
  * @package App\StarFleetCommanderBundle\FleetBundle\Api
  */
 class StarFleetCommanderApi implements DefaultApiInterface

@@ -120,6 +120,7 @@ class DefaultController extends Controller
             // Make the call to the business logic
             $responseCode = 200;
             $responseHeaders = [];
+
             $result = $handler->buildFleet($formation, $spaceshipRequest, $responseCode, $responseHeaders);
 
             // Find default response message
