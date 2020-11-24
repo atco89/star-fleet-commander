@@ -1,0 +1,139 @@
+openapi: 3.0.0
+servers:
+  - url: "https://localhost/internal/public"
+    description: Server description.
+info:
+  title: Star Fleet Commander API
+  version: 1.0.0
+  contact:
+    name: Aleksandar Rakić
+    email: aleksandar.rakic@yahoo.com
+paths:
+  /fleet/{formation}/formation:
+    post:
+      summary: Order fleet.
+      description: You can order a fleet to take formations - attack, escort.
+      operationId: buildFleet
+      parameters:
+        - $ref: "#/components/parameters/formation"
+      requestBody:
+        $ref: "#/components/requestBodies/SpaceshipRequest"
+      responses:
+        200:
+          $ref: "#/components/responses/SpaceshipResponse"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthenticated"
+        403:
+          $ref: "#/components/responses/Unauthorized"
+        409:
+          $ref: "#/components/responses/Conflict"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+components:
+  requestBodies:
+    SpaceshipRequest:
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/SpaceshipRequest"
+  responses:
+    SpaceshipResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/SpaceshipResponse"
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Unauthenticated:
+      description: Unauthenticated
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Conflict:
+      description: The specified resource already exists
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+  schemas:
+    SpaceshipRequest:
+      type: object
+      properties:
+        spaceship:
+          type: string
+        captain_junior:
+          type: boolean
+        quantity:
+          type: integer
+      required:
+        - spaceship
+        - captain_junior
+        - quantity
+    SpaceshipResponse:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        military:
+          type: boolean
+        captain_junior:
+          type: boolean
+        rank:
+          type: integer
+      required:
+        - uuid
+        - name
+        - military
+        - captain_junior
+        - rank
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+  parameters:
+    formation:
+      name: formation
+      in: path
+      required: true
+      description: Fleet formation.
+      schema:
+        type: string
