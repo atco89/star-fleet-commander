@@ -1,3 +1,4 @@
 /.idea/
 /src/internal/vendor/
 /src/openapi/openapi-generator/
+.DS_Store
